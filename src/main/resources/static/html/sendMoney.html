@@ -1,0 +1,62 @@
+<!-- sendMoney.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Money</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <script src="../js/sendMoney.js" defer></script>
+    <style>
+        /* Add your custom styles here */
+        #sendMoneyContainer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .input-label {
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        #amount,
+        #account {
+            width: 200px; /* Set the width as per your preference */
+            padding: 5px; /* Add padding for better appearance */
+        }
+
+        #sendMoneyButton {
+            margin-top: 20px;
+            padding: 10px 20px; /* Adjust padding to make the button smaller or larger */
+            font-size: 16px; /* Adjust font size as per your preference */
+        }
+
+        #goBackContainer {
+            text-align: center;
+            margin-top: 10px; /* Add margin between the buttons */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Send Money section -->
+<div id="sendMoneyContainer">
+    <h2>Send Money</h2>
+    <label for="amount" class="input-label">Enter Amount:</label>
+    <input type="text" id="amount" name="amount" required>
+
+    <label for="account" class="input-label">Enter Account:</label>
+    <input type="text" id="account" name="account" required>
+
+    <button id="sendMoneyButton" onclick="sendMoney()">Send Money</button>
+</div>
+
+<!-- Go Back button -->
+<div id="goBackContainer">
+    <button id="goBackButton" onclick="goBack()">Go Back</button>
+</div>
+
+</body>
+</html>

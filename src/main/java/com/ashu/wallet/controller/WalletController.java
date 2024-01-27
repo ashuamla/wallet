@@ -1,5 +1,6 @@
 package com.ashu.wallet.controller;
 
+import com.ashu.wallet.model.Transaction;
 import com.ashu.wallet.model.User;
 import com.ashu.wallet.model.Wallet;
 import com.ashu.wallet.service.UserService;
@@ -64,5 +65,20 @@ public class WalletController {
     @PostMapping("/wallet/upiId")
     public Wallet getWalletById(@RequestBody Map<String, String> upiId){
         return walletService.getWalletByUpiId(upiId.get("upiId"));
+    }
+
+    @PostMapping("/wallet/load")
+    public String loadWallet(@RequestBody Map<String, String> loadingDetails){
+        return walletService.addMoneyInWallet(loadingDetails);
+    }
+
+    @PostMapping("wallet/recordTransaction")
+    public String recordTransaction(@RequestBody Map<String, String> transactionDetails){
+        return walletService.recordTransaction(transactionDetails);
+    }
+
+    @PostMapping("wallet/showTransactions")
+    public List<Transaction> showTransaction(@RequestBody Map<String, String> transactionDetails){
+        return walletService.showTransactions(transactionDetails);
     }
 }
