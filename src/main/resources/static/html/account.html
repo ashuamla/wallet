@@ -1,0 +1,46 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Account Information</title>
+        <link rel="stylesheet" href="../css/common.css">
+        <script src="../js/account.js" defer></script>
+        <style>
+            /* Add your custom styles here */
+            #userDetails {
+                margin-top: 10px;
+
+            }
+
+            #userActions button {
+                margin-top: 40px;
+            }
+            #header {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        </style>
+
+    </head>
+    <body>
+    <div id = "header">
+        <h2>User Account Information</h2>
+    </div>
+    <div id="userDetails">
+        <p><strong>Name:</strong> <span id="accountName"></span></p>
+        <p><strong>Email:</strong> <span id="accountEmail"></span></p>
+        <p><strong>UPI ID:</strong> <span id="accountUpiId"></span></p>
+        <p><strong>Account Balance:</strong> <span id="accountBalance"></span></p>
+        <!-- Add more user details as needed -->
+    </div>
+    <div id="userActions">
+        <button onclick="showTransactions()">Show Transactions</button>
+        <button onclick="loadWallet()">Load Wallet</button>
+        <button onclick="sendMoney()">Send Money</button>
+        <!-- Add more action buttons or links as needed -->
+    </div>
+    <!-- Add more HTML code if necessary -->
+    </body>
+    </html>
