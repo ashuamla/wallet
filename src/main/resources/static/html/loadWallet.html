@@ -1,0 +1,52 @@
+<!-- loadWallet.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Wallet</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <script src="../js/loadWallet.js" defer></script>
+    <style>
+        /* Add your custom styles here */
+        #loadWalletContainer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #amount {
+            width: 200px; /* Set the width as per your preference */
+            padding: 5px; /* Add padding for better appearance */
+        }
+
+        #loadWalletButton, #goBackButton {
+            margin-top: 20px;
+            padding: 10px 20px; /* Adjust padding to make buttons smaller or larger */
+            font-size: 16px; /* Adjust font size as per your preference */
+            display: inline-block; /* Make buttons inline */
+        }
+
+        #goBackContainer {
+            text-align: center;
+            margin-top: 10px; /* Add margin between the buttons */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Load Wallet section -->
+<div id="loadWalletContainer">
+    <h2>Load Wallet</h2>
+    <label for="amount">Enter Amount:</label>
+    <input type="text" id="amount" name="amount" required>
+    <button id="loadWalletButton" onclick="loadWallet()">Load Wallet</button>
+</div>
+
+<!-- Go Back button -->
+<div id="goBackContainer">
+    <button id="goBackButton" onclick="goBack()">Go Back</button>
+</div>
+
+</body>
+</html>

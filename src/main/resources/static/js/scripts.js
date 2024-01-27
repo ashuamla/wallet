@@ -47,61 +47,70 @@ document.getElementById('registerButton').addEventListener('click', async functi
 });
 
 document.getElementById('loginButton').addEventListener('click', async function (event) {
-	event.preventDefault(); // Prevent the default form submission
-	const emailOrMobileNumber = document.getElementById('loginIdentifier').value;
-	const password = document.getElementById('loginPassword').value;
+    event.preventDefault(); // Prevent the default form submission
+    const emailOrMobileNumber = document.getElementById('loginIdentifier').value;
+    const password = document.getElementById('loginPassword').value;
 
-	const loginData = {
-		"emailOrMobileNumber": emailOrMobileNumber,
-		"password": password
-	};
+    const loginData = {
+        "emailOrMobileNumber": emailOrMobileNumber,
+        "password": password
+    };
 
-	try {
-		const response = await fetch('http://localhost:8080/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(loginData),
-		});
+    try {
+        const response = await fetch('http://localhost:8080/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(loginData),
+        });
 
-		if (response.ok) {
-			console.log('Login request sent successfully');
+        if (response.ok) {
+            console.log('Login request sent successfully');
 
-			// Check if the response has a valid JSON payload
-			const contentType = response.headers.get('content-type');
-			if (contentType && contentType.includes('application/json')) {
-				 const userData = await response.json();
-				//now getting wallet data
-               const walletResponse = await fetch('http://localhost:8080/wallet/upiId', {
-                   method: 'POST',
-                   headers: {
-                       'Content-Type': 'application/json',
-                   },
-                   body: JSON.stringify({upiId:userData.upiId})  // Assuming userData.upiId is a string
-               });
+            // Check if the response has a valid JSON payload
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                const userData = await response.json();
+                // now getting wallet data
+                const walletResponse = await fetch('http://localhost:8080/wallet/upiId', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ upiId: userData.upiId })  // Assuming userData.upiId is a string
+                });
 
-               if (walletResponse.ok) {
-                   console.log('Got wallet data successfully');
-                   const walletData = await walletResponse.json();
-                   console.log(walletData); // Log the response
-                   userData.balance = walletData.balance;
-                   window.location.href = `account.html?name=${userData.name}&email=${userData.email}&upiId=${userData.upiId}&balance=${userData.balance}`;
-               } else {
-                   console.error('Failed to get wallet data');
-               }
+                if (walletResponse.ok) {
+                    console.log('Got wallet data successfully');
+                    const walletData = await walletResponse.json();
+                    console.log(walletData); // Log the response
+                    userData.balance = walletData.balance;
+                    sessionStorage.setItem('currentUser', JSON.stringify(userData));
+                    window.location.href = "account.html";
+                } else {
+                    console.error('Failed to get wallet data');
+                }
+            } else {
+                console.error('Invalid JSON response from server');
+                // Handle the error appropriately
+                 alert('Incorrect username or password. Please try again.');
+            }
+        } else {
+            console.error('Failed to send login request');
 
-
-			} else {
-				console.error('Invalid JSON response from server');
-				// Handle the error appropriately
-			}
-		} else {
-			console.error('Failed to send login request');
-			// Handle failed login, e.g., display an error message
-		}
-	} catch (error) {
-		console.error('Error:', error);
-		// Handle network errors or other exceptions
-	}
+            // Check for specific login failure status code
+            if (response.status === 401) {
+                // Unauthorized (login failed)
+                alert('Incorrect username or password. Please try again.');
+            } else {
+                // Handle other errors or display a generic message
+                alert('Login failed. Please try again later.');
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        // Handle network errors or other exceptions
+        alert('Error during login. Please try again later.');
+    }
 });
