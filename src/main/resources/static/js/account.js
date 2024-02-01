@@ -1,8 +1,14 @@
-// account.js
+const isProduction = true; // Set this to true in production, false in development
 
-// Retrieve user information from the server
-// account.js
+//let serverUrl;
 
+if (isProduction) {
+    // Heroku URL or your production server URL
+    serverUrl = 'https://floating-sands-04180-8a16c12656a3.herokuapp.com';
+} else {
+    // Local development server URL
+    serverUrl = 'http://localhost:8080';
+}
 // Function to update user information on the account page
 function updateUserInfo() {
     // Retrieve user information from the server
@@ -88,7 +94,7 @@ function showTransactions() {
         const upiId = user.upiId;
 
         // Call the API to get user transactions
-        fetch('http://localhost:8080/wallet/showTransactions', {
+        fetch(`${serverUrl}/wallet/showTransactions`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

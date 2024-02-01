@@ -1,1 +1,1 @@
-web: java -jar target/wallet.jar
+web: java -jar target/wallet-0.0.1-SNAPSHOT.jar -Dspring.profiles.active=prod $JAVA_OPTS

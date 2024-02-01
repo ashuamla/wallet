@@ -1,4 +1,15 @@
 // sendMoney.js
+const isProduction = true; // Set this to true in production, false in development
+
+//let serverUrl;
+
+if (isProduction) {
+    // Heroku URL or your production server URL
+    serverUrl = 'https://floating-sands-04180-8a16c12656a3.herokuapp.com';
+} else {
+    // Local development server URL
+    serverUrl = 'http://localhost:8080';
+}
 
 function sendMoney() {
     const amountInput = document.getElementById('amount');
@@ -56,7 +67,7 @@ function recordTransaction(upiId, account, amount, narration) {
     };
 
 //     Call the API to record the transaction (if needed)
-     fetch('http://localhost:8080/wallet/recordTransaction', {
+     fetch(`${serverUrl}/wallet/recordTransaction`, {
          method: 'POST',
          headers: {
              'Content-Type': 'application/json',

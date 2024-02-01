@@ -17,8 +17,8 @@ import java.util.Map;
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class WalletController {
 
-    private UserService userService;
-    private WalletService walletService;
+    private final UserService userService;
+    private final WalletService walletService;
 
 
     @Autowired
@@ -72,12 +72,12 @@ public class WalletController {
         return walletService.addMoneyInWallet(loadingDetails);
     }
 
-    @PostMapping("wallet/recordTransaction")
+    @PostMapping("/wallet/recordTransaction")
     public String recordTransaction(@RequestBody Map<String, String> transactionDetails){
         return walletService.recordTransaction(transactionDetails);
     }
 
-    @PostMapping("wallet/showTransactions")
+    @PostMapping("/wallet/showTransactions")
     public List<Transaction> showTransaction(@RequestBody Map<String, String> transactionDetails){
         return walletService.showTransactions(transactionDetails);
     }
